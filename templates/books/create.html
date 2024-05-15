@@ -1,0 +1,29 @@
+{% extends 'layout/app.html' %}
+{% block title %}New Book{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>New book</h1>
+    <form action="{{ url_for('book_routes.store', book=None) }}" method="POST">
+        <div class="input-group mb-3">
+            <span class="input-group-text">#</span>
+            <select name="author_id" class="form-control" aria-label="author_id" required>
+                <option selected disabled>Author</option>
+                {% for author in authors %}
+                <option value="{{ author.id }}">{{ author.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">.</span>
+            <input type="text" name="isbn" value="" class="form-control" pattern="[0-9]{3}-[0-9]{1,5}-[0-9]{1,7}-[0-9]{1,7}-[0-9]{1}" title="Ingrese un ISBN válido (formato: 123-4-56789-012-3)" placeholder="####" aria-label="isbn">
+            <span class="input-group-text">.</span>
+            <input type="text" name="name" value="" class="form-control" placeholder="Book Name" aria-label="name" required>
+            <span class="input-group-text">#</span>
+            <input type="number" name="quantity_pages" value="" min="1" class="form-control" placeholder="Pages" aria-label="quantity_pages" required>
+        </div>
+        <div class="input-group">
+            <input type="submit" class="btn btn-outline-primary form-control" value="Save">
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'layout/app.html' %}
+{% block content %}
+<div class="container mt-3">
+    <h1>Authors</h1>
+    <div class="text-end">
+        <a href="/authors/create" class="btn btn-sm btn-outline-success">New Author</a>
+    </div>
+    <table class="table table-responsive table-sm" id="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Created At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+            <tr>
+                <td>{{ loop.index}}.</td>
+                <td>{{ author.name }}</td>
+                <td>{{ author.age }}</td>
+                <td>{{ author.created_at }}</td>
+                <td><a href="/authors/{{ author.id }}/edit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i> Edit</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    })
+</script>
+{% endblock %}

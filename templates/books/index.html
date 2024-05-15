@@ -1,0 +1,40 @@
+{% extends 'layout/app.html' %}
+{% block content %}
+<div class="container mt-3">
+    <h1>Books</h1>
+    <div class="text-end">
+        <a href="/books/create" class="btn btn-sm btn-outline-success">New Book</a>
+    </div>
+    <table class="table table-responsive table-sm" id="table">
+        <thead>
+            <tr>
+                <th>Isbn</th>
+                <th>Author</th>
+                <th>Name</th>
+                <th>Pages</th>
+                <th>Created At</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.author.name }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.quantity_pages }}</td>
+                <td>{{ book.created_at }}</td>
+                <td><a href="/books/{{ book.id }}/edit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i> Edit</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    })
+</script>
+{% endblock %}

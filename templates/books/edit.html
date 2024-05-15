@@ -1,0 +1,35 @@
+{% extends 'layout/app.html' %}
+{% block title %}Edit Book - {{ book.name }}{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Book: {{ book.name }}</h1>
+    <form action="{{ url_for('book_routes.update', book_id=book.id) }}" method="POST">
+        <div class="input-group mb-3">
+            <span class="input-group-text">#</span>
+            <select name="author_id" class="form-control" id="form_author_id" aria-label="author_id" required>
+                <option selected disabled>Author</option>
+                {% for author in authors %}
+                <option value="{{ author.id }}">{{ author.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">.</span>
+            <input type="text" name="isbn" value="{{book.isbn}}" class="form-control" pattern="[0-9]{3}-[0-9]{1,5}-[0-9]{1,7}-[0-9]{1,7}-[0-9]{1}" title="Ingrese un ISBN válido (formato: 123-4-56789-012-3)" placeholder="####" aria-label="isbn">
+            <span class="input-group-text">.</span>
+            <input type="text" name="name" value="{{book.name}}" class="form-control" placeholder="Book Name" aria-label="name" required>
+            <span class="input-group-text">#</span>
+            <input type="number" name="quantity_pages" value="{{book.quantity_pages}}" min="1" class="form-control" placeholder="Pages" aria-label="quantity_pages" required>
+        </div>
+
+        <div class="input-group">
+            <input type="submit" class="btn btn-outline-success form-control" value="Save changes">
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    document.querySelector('#form_author_id').value = "{{book.author_id}}";
+</script>
+{% endblock %}
