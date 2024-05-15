@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, url_for, redirect, request, render_template, flash
 import uuid, datetime
 from models import Author
-from models import db
+from utils.db import db
 author_routes = Blueprint('author_routes', __name__)
 
 def generate_uuid():

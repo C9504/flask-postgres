@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify, flash
 import uuid
 import datetime
-from models import db
+from utils.db import db
 from models import Book, Author
 
 book_routes = Blueprint('book_routes', __name__)
